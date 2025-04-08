@@ -68,7 +68,6 @@ const Notes = () => {
     <>
     <h1 style={{textAlign: "center"}}>Inotebook</h1>
       <Search />
-      <Addnote />
       {/*  Veiw Modal */}
       <div
         className="modal fade "
@@ -210,7 +209,7 @@ const Notes = () => {
               <Noteitem
                 key={note._id}
                 note={note}
-                
+                tag={note.tag}
                 updatenote={updatenote}
                  handleModal={handleModal}
               />

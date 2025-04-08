@@ -1,13 +1,18 @@
+
 import React, { useContext ,useState}from 'react'
 import { NoteContext } from '../Context/notes/noteState'
+import { Link, useLocation,useNavigate} from "react-router-dom";
+
 const Addnote = () => {
     const context=useContext(NoteContext);
+    let navigate=useNavigate();
     const {addnote}=context;
     const [note, setnote] = useState({title:"",description:"",tag:""})
     const handleClick=(e)=>{
         e.preventDefault();
       addnote(note.title,note.description,note.tag)
       setnote({title:"",description:"",tag:""})
+      navigate("/");
     }
     const HandleChange=(e)=>{
        setnote({...note,[e.target.name]:e.target.value})

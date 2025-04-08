@@ -1,8 +1,9 @@
+
 import React, { useContext ,useState}from 'react'
 import { NoteContext } from '../Context/notes/noteState'
 
 const Noteitem = (props) => {
-    const {note,updatenote ,handleModal}=props;
+    const {note,updatenote ,key,tag,handleModal}=props;
     const context=useContext(NoteContext);
     const {deletenote}=context;
     const handleClick=()=>{
@@ -44,6 +45,9 @@ const Noteitem = (props) => {
        {note.description.length > 20 ? note.description.slice(0, 20) + '...' : note.description}
 
       </p>  
+      <span  className="badge bg-primary me-1">
+        { `#${tag}`}
+        </span>
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useLocation,useNavigate} from "react-router-dom";
 
@@ -8,9 +9,15 @@ const Navbar = () => {
    localStorage.removeItem('token');
    navigate('/Login');
  }
+ const handleAdd=()=>{
+  navigate('/Addnote')
+ }
   return (
     <div>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav
+  className=" navbar navbar-expand-lg bg-body-tertiary"
+ 
+>
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             Navbar
@@ -50,9 +57,14 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
+            <button type="button" className="btn btn-primary "onClick={handleAdd}>
+  Add Note
+</button>
             {!localStorage.getItem('token')? <form className="d-flex">
             
-            </form>:<button className="btn btn-primary" onClick={handleLogout}>Logout</button>}
+            </form>:<button className="btn btn-primary ms-2" onClick={handleLogout}>Logout</button>}
+
+
           </div>
         </div>
       </nav>

@@ -1,3 +1,4 @@
+
 import { createContext, useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 const NoteContext = createContext();
@@ -23,7 +24,10 @@ const NoteState = (props) => {
     
     );
     const json = await response.json()
+    console.log(json)
+
     setnotes(Array.isArray(json) ? json : []);
+    
     if (json.status === 401) {
       console.error("Unauthorized: Invalid token");
       navigate('/Login'); // Redirect to login if unauthorized
@@ -77,7 +81,6 @@ const NoteState = (props) => {
   
   );
   const json = await response.json()
-  console.log(json)
 let newnotes=notes.filter((note)=>{
   return note._id!==id;
 })
@@ -118,11 +121,19 @@ const updatedNotes=notes.map((note)=>{
   //search note
   const searchNote= async (query)=>{
   try{
+    let endpoint=''
     if (query==='') {
       return getnotes(); // Fetch all notes
     }
+    if(query.startsWith("#")){
+      query=query.substring(1);
+      endpoint=`${host}/api/notes/findTag?query=${query}`
+    }
+    else{
+      endpoint=`${host}/api/notes/findNote?query=${query}`
+    }
     const response= await fetch(
-      `${host}/api/notes/findNote?query=${query}`,
+      endpoint,
       {
         method :"GET",
         headers:{
